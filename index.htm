@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="de"
+      ng-app="buzzwordBingo">
+
+    <head>
+        <title>BuBi - A Buzzword / Bullshit Bingo Generator built with AngularJS</title>
+
+        <meta charset="utf-8">
+        <meta name="author" content="Jan G. Wieners">
+        <meta name="description" content="BuBi - A Buzzword / Bullshit Bingo Generator built with AngularJS">
+        <meta name="keywords" content="Buzzword, Bullshit, Bingo, Generator, AngularJS, jQuery">
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    </head>
+
+    <body>
+
+        <div id="buzzBox" ng-controller="buzzWordCtrl">
+
+            <textarea id="buzzWords" cols="40" rows="8"
+                      ng-model="buzzWords"
+                      ng-change="splitWords()"
+                      placeholder="{{placeholder}}"></textarea>
+
+            <div id="output">
+                <div ng-repeat="term in terms track by $index" class="term">{{term}}</div>
+            </div>
+
+            <div id="cardCreator">
+
+                <label for="cardCount"> Number of Cards: <input id="cardCount" type="number" ng-model="cardCount"></label>
+                <br>
+                <a href="#cards" class="page-scroll" id="goButton" ng-click="createCards()">Go!</a>
+
+            </div>
+
+            <div id="cards">
+
+                <div id="printCards" ng-click="printCards()">Click here to print your cards</div>
+
+                <div ng-repeat="card in cards">
+
+                    <table class="card">
+                        <tr>
+                            <th colspan="{{columns}}">
+                                {{card.name}}
+                            </th>
+                        </tr>
+                        <tr ng-repeat="row in card.rows track by $index">
+                            <td ng-repeat="column in row track by $index" class="buzzWord">
+                                {{column}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" id="classFooter"><a href="http://www.jan-wieners.de">www.jan-wieners.de</a></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
+        <script src="js/BuBi.js"></script>
+
+    </body>
+
+</html>
